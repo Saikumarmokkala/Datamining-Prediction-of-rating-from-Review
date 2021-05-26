@@ -32,4 +32,4 @@ Now we have done most of the heavy work We just will create an HTML Page which w
 
 So are you ready to try out the web app ????
 
-I know your are :) Please click here (http://saikumarreddymokkala.uta.cloud/predict.html) to try out the app. Please remember to give in reviews as normal human :P so that you will get good rating prediction.
+I know your are :) Please click here ( http://saikumarreddymokkala.uta.cloud/predict.html ) to try out the app. Please remember to give in reviews as normal human :P so that you will get good rating prediction.
