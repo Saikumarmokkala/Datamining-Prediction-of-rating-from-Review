@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Term_Project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Predicting rating from Review</h1>
+  <p>This web app works while calling Amazon endpoint where the model has been deployed!</p> 
+</div>
+<div class="container">
+<div class="form-horizontal" >
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="review">Review:</label>
+      <div class="col-sm-10">
+          <textarea class="form-control" id="review" placeholder="Enter review" name="review" rows="3"></textarea>
+        
+      </div>
+    </div>
+
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button  onclick="loadDoc()" class="btn btn-default">Predict Rating</button>
+        <button  onclick="clearAl()" class="btn btn-default">Clear</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="predict">Predicted Rating:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="predict"  name="predict" readonly>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="container">
+    <br></br>
+ <h3> Please keep in note that deployed model has an accuracy of ~31%. However the model gives you considerable ratings. To optimize further, please give review without spelling mistakes. </h3>   `
+   <div class="row">
+       <div class="col-sm-3"></div>
+       <div class="col-sm-6">
+     <p id="history" style="font-size:20px;">
+         
+     </p> 
+     </div>
+       <div class="col-sm-3"></div>
+   </div> 
+</div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function clearAl()
+{
+    document.getElementById('review').value ="";
+    document.getElementById('predict').value =""
+}
+function loadDoc() {
+
+  var  kill = document.getElementById('review').value;
+    var dat = kill.replace(',', ' ');
+if(dat=="")
+{
+    window.alert("The review can not be blank, please enter some value")
+}
+else{
+  console.log(kill);
+ var settings = {
+  "url": "https://cors-anywhere.herokuapp.com/https://lgfaaa8k21.execute-api.us-east-2.amazonaws.com/test-1/test-1",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": JSON.stringify({"data":dat}),
+};
+
+$.ajax(settings).done(function (response) {
+  /*console.log(response);*/
+  
+  document.getElementById('predict').value = response;
+  var his = document.getElementById('history').innerHTML;
+
+his = dat +" : " + response +" <br> " +his;
+
+document.getElementById('history').innerHTML = his;
+});
+
+}
+}
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+import os
+import io
+import boto3
+import json
+import csv
+def lambda_handler(event, context):
+    data = json.loads(json.dumps(event))
+    payload = data['data']
+    response = runtime.invoke_endpoint(EndpointName=ENDPOINT_NAME,
+                                       ContentType='text/csv',
+                                       Body=payload)
+ 
+    result = json.loads(response['Body'].read().decode()
+    return result
+    
